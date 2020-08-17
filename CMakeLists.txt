@@ -74,15 +74,3 @@ endif(BUILD_PLUGIN)
 install(FILES src/blosc_filter.h DESTINATION include COMPONENT HDF5_FILTER_DEV)
 install(TARGETS blosc_filter_shared DESTINATION lib COMPONENT HDF5_FILTER_DEV)
 
-
-# test
-message("LINK LIBRARIES='blosc_filter_shared ${HDF5_LIBRARIES}'")
-if(BUILD_TESTS)
-    enable_testing()
-    set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
-    find_package(Threads REQUIRED)
-    set(LIBS ${LIBS} ${CMAKE_THREAD_LIBS_INIT})
-    add_executable(example src/example.c)
-    target_link_libraries(example blosc_filter_shared ${HDF5_LIBRARIES} ${LIBS})
-    add_test(test_hdf5_filter example)
-endif(BUILD_TESTS)
